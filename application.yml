@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:postgresql://host.docker.internal:5432/core_database
-    username: postgres
-    password: admin
+    username: leonan
+    password: 123456
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
