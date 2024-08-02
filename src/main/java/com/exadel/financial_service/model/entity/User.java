@@ -1,7 +1,6 @@
 package com.exadel.financial_service.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.UUID;
@@ -14,4 +13,6 @@ public class User {
     private String name;
     private String email;
     private String cpf;
+    @OneToOne(mappedBy = "owner", fetch = FetchType.LAZY)
+    private Account account;
 }
