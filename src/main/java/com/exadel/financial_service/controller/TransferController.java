@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class TransferController {
     @GetMapping("/transfer")
     public ResponseEntity<String> transfer() {
-        return ResponseEntity.ok("Transfer successful");
+         return ResponseEntity.ok("Transfer successful");
     }
 }
