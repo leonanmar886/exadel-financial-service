@@ -6,7 +6,8 @@ import lombok.Data;
 import java.util.UUID;
 
 @Data
-@Entity(name = "users")
+@Entity
+@Table(name = "users")
 public class User {
     @Id
     private UUID id;

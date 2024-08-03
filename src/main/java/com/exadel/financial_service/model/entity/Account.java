@@ -3,10 +3,12 @@ package com.exadel.financial_service.model.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
 import java.util.UUID;
 
 @Data
-@Entity(name = "accounts")
+@Entity
+@Table(name = "accounts")
 public class Account {
     @Id
     private UUID id;
@@ -17,4 +19,7 @@ public class Account {
     private User owner;
 
     private double balance;
+
+    @OneToMany(mappedBy = "source", fetch = FetchType.LAZY)
+    private List<Transaction> transactions;
 }
