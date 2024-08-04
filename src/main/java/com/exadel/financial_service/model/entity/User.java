@@ -1,5 +1,6 @@
 package com.exadel.financial_service.model.entity;
 
+import com.exadel.financial_service.model.pojo.DateAudit;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +11,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "users")
 @AllArgsConstructor
-public class User {
+public class User extends DateAudit {
     @Id
     private UUID id;
     private String name;
