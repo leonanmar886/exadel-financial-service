@@ -14,6 +14,7 @@ import java.util.UUID;
 public class Account {
     @Id
     private UUID id;
+    @Column(name = "account_number")
     private String accountNumber;
 
     @OneToOne(fetch = FetchType.LAZY)
