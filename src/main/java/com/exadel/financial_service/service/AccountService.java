@@ -48,16 +48,16 @@ public class AccountService {
         return accountRepository.save(account);
     }
 
-    public Account getAccount(UUID accountId) {
-        return accountRepository.findById(accountId)
+    public Account getAccountByNumber(String accountNumber) {
+        return accountRepository.findByAccountNumber(accountNumber)
                 .orElseThrow(() -> new EntityNotFoundException("Account not found"));
     }
 
-//    public List<Account> getAccounts(UUID userId) {
-//        return accountRepository.findAllByUserId(userId);
-//    }
-
     public void deleteAccount(UUID accountId) {
         accountRepository.deleteById(accountId);
+    }
+
+    public void updateAccount(Account account) {
+        accountRepository.save(account);
     }
 }

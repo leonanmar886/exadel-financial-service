@@ -4,13 +4,12 @@ import com.exadel.financial_service.model.pojo.DateAudit;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.Date;
 import java.util.UUID;
 
 @Data
 @Entity
 @Table(name = "transactions")
-public class Transaction extends DateAudit {
+public class Transfer extends DateAudit {
     @Id
     private UUID id;
 
@@ -22,8 +21,15 @@ public class Transaction extends DateAudit {
     @JoinColumn(name = "destination_account_id")
     private Account destination;
 
-    private double amount;
+    private Double amount;
 
-    @Column(name = "transaction_date")
-    private Date date;
+    public Transfer(Account payerAccount, Account payeeAccount, Double amount) {
+        this.id = UUID.randomUUID();
+        this.amount = amount;
+        this.source = payerAccount;
+        this.destination = payeeAccount;
+    }
+
+    public Transfer() {
+    }
 }

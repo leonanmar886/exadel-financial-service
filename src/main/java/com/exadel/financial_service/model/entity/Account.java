@@ -25,7 +25,7 @@ public class Account extends DateAudit {
     private double balance;
 
     @OneToMany(mappedBy = "source", fetch = FetchType.LAZY)
-    private List<Transaction> transactions;
+    private List<Transfer> transactions;
 
     public Account() {
         this.id = UUID.randomUUID();
