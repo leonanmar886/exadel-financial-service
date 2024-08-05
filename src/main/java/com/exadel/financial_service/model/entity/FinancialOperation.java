@@ -12,12 +12,13 @@ import java.util.UUID;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class FinancialOperation extends DateAudit {
     @Id
+    @GeneratedValue
+    @Column(columnDefinition = "UUID")
     private UUID id;
 
     private Double amount;
 
     public FinancialOperation(Double amount) {
-        this.id = UUID.randomUUID();
         this.amount = amount;
     }
 

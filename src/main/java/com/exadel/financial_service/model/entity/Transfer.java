@@ -1,9 +1,6 @@
 package com.exadel.financial_service.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 @Entity
 public class Transfer extends FinancialOperation {
@@ -14,6 +11,11 @@ public class Transfer extends FinancialOperation {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "destination_account_id")
     private Account destination;
+
+    @MapsId
+    @OneToOne
+    @JoinColumn(name = "id")
+    private FinancialOperation financialOperation;
 
     public Transfer(Double amount) {
         super(amount);
