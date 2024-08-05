@@ -16,4 +16,9 @@ public class Deposit extends FinancialOperation {
 
     public Deposit() {
     }
+
+    public Deposit(Account account, Double amount) {
+        super(amount);
+        this.account = account;
+    }
 }

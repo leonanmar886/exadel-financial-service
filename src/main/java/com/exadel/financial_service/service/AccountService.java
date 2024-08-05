@@ -1,7 +1,6 @@
 package com.exadel.financial_service.service;
 
 import com.exadel.financial_service.model.dto.request.CreateAccountRequestDTO;
-import com.exadel.financial_service.model.dto.request.DepositRequestDTO;
 import com.exadel.financial_service.model.entity.Account;
 import com.exadel.financial_service.model.entity.User;
 import com.exadel.financial_service.repository.AccountRepository;
@@ -52,12 +51,6 @@ public class AccountService {
     public Account getAccountByNumber(String accountNumber) {
         return accountRepository.findByAccountNumber(accountNumber)
                 .orElseThrow(() -> new EntityNotFoundException("Account not found"));
-    }
-
-    public void deposit(DepositRequestDTO request) {
-        Account account = getAccountByNumber(request.accountNumber());
-        account.setBalance(account.getBalance() + request.amount());
-        accountRepository.save(account);
     }
 
     public void deleteAccount(UUID accountId) {
