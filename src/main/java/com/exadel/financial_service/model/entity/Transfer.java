@@ -1,18 +1,12 @@
 package com.exadel.financial_service.model.entity;
 
-import com.exadel.financial_service.model.pojo.DateAudit;
-import jakarta.persistence.*;
-import lombok.Data;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
-import java.util.UUID;
-
-@Data
 @Entity
-@Table(name = "transactions")
-public class Transfer extends DateAudit {
-    @Id
-    private UUID id;
-
+public class Transfer extends FinancialOperation {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "source_account_id")
     private Account source;
@@ -21,15 +15,16 @@ public class Transfer extends DateAudit {
     @JoinColumn(name = "destination_account_id")
     private Account destination;
 
-    private Double amount;
-
-    public Transfer(Account payerAccount, Account payeeAccount, Double amount) {
-        this.id = UUID.randomUUID();
-        this.amount = amount;
-        this.source = payerAccount;
-        this.destination = payeeAccount;
+    public Transfer(Double amount) {
+        super(amount);
     }
 
     public Transfer() {
+    }
+
+    public Transfer(Account source, Account destination, Double amount) {
+        super(amount);
+        this.source = source;
+        this.destination = destination;
     }
 }

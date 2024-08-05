@@ -2,15 +2,16 @@ package com.exadel.financial_service.service;
 
 import com.exadel.financial_service.model.dto.request.CreationTransferRequestDTO;
 import com.exadel.financial_service.model.entity.Account;
+import com.exadel.financial_service.model.entity.FinancialOperation;
 import com.exadel.financial_service.model.entity.Transfer;
-import com.exadel.financial_service.repository.TransferRepository;
+import com.exadel.financial_service.repository.FinancialOperationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class TransferService {
-    private final TransferRepository transferRepository;
+    private final FinancialOperationRepository financialOperationRepository;
     private final AccountService accountService;
 
     public void transfer(CreationTransferRequestDTO request) {
@@ -27,7 +28,7 @@ public class TransferService {
         accountService.updateAccount(payerAccount);
         accountService.updateAccount(payeeAccount);
 
-        transferRepository.save(
+        financialOperationRepository.save(
             new Transfer(
                 payerAccount,
                 payeeAccount,
