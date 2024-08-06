@@ -1,14 +1,14 @@
 package com.exadel.financial_service.model.dto.request;
 
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 
 public record CreationTransferRequestDTO(
-        @NotNull(message = "Payer account number cannot be null")
+        @NotBlank
         String payerAccountNumber,
-        @NotNull(message = "Payee account number cannot be null")
+        @NotBlank
         String payeeAccountNumber,
-        @NotNull(message = "Amount cannot be null")
+        @NotBlank
         @Min(value = 1, message = "Amount must be greater than 1")
         Double amount
 ) {

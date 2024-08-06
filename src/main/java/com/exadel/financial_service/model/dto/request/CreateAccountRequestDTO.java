@@ -1,15 +1,14 @@
 package com.exadel.financial_service.model.dto.request;
 
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 public record CreateAccountRequestDTO(
-        @NotNull(message = "Name cannot be null")
+        @NotBlank
         String name,
-        @NotNull(message = "'Email cannot be null'")
-        @Pattern(regexp = "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$", message = "Invalid email format")
+        @Email
         String email,
-        @NotNull(message = "CPF cannot be null")
+        @NotBlank
         String cpf
 ) {
 }
