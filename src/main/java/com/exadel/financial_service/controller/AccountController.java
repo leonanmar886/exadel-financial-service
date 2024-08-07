@@ -1,7 +1,7 @@
 package com.exadel.financial_service.controller;
 
 import com.exadel.financial_service.model.dto.request.CreateAccountRequestDTO;
-import com.exadel.financial_service.service.AccountService;
+import com.exadel.financial_service.service.core.CoreService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @Validated
 public class AccountController {
-    private final AccountService accountService;
+    private final CoreService coreService;
 
     @PostMapping("/create")
     public ResponseEntity<String> createAccount(@RequestBody @Valid CreateAccountRequestDTO request) {
-        accountService.createAccount(request);
+        coreService.createAccount(
+            request.name(),
+            request.email(),
+            request.cpf()
+        );
         return ResponseEntity.ok("Account created");
     }
 }

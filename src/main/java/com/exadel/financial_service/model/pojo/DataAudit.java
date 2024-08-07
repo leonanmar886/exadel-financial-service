@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @ToString
 @RequiredArgsConstructor
 @MappedSuperclass
-public abstract class DateAudit implements Serializable {
+public abstract class DataAudit implements Serializable {
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
     @Column(name = "updated_at", nullable = false)

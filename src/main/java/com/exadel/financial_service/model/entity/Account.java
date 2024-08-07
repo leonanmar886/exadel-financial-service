@@ -1,6 +1,6 @@
 package com.exadel.financial_service.model.entity;
 
-import com.exadel.financial_service.model.pojo.DateAudit;
+import com.exadel.financial_service.model.pojo.DataAudit;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,15 +12,11 @@ import java.util.UUID;
 @Entity
 @Table(name = "accounts")
 @AllArgsConstructor
-public class Account extends DateAudit {
+public class Account extends DataAudit {
     @Id
     private UUID id;
-    @Column(name = "account_number")
-    private String accountNumber;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User owner;
+    @Column(name = "account_id")
+    private String accountId;
 
     private double balance;
 
@@ -33,9 +29,6 @@ public class Account extends DateAudit {
 
     public Account() {
         this.id = UUID.randomUUID();
-        this.accountNumber = "0";
-        this.owner = null;
-        this.balance = 0.0;
         this.transactions = List.of();
     }
 }
