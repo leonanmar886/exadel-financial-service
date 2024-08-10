@@ -1,7 +1,9 @@
-package com.exadel.financial_service.service.entity.account;
+package com.exadel.financial_service.service.account;
 
+import com.exadel.financial_service.model.dto.request.CreateAccountRequestDTO;
 import com.exadel.financial_service.model.entity.Account;
 import com.exadel.financial_service.repository.AccountRepository;
+import com.exadel.financial_service.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +15,10 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService{
     private final AccountRepository accountRepository;
+    private final UserService userService;
 
     @Override
-    public Account createAccount() {
+    public void createAccount(CreateAccountRequestDTO request) {
         Account account = new Account(
                 UUID.randomUUID(),
                 UUID.randomUUID().toString(),
@@ -23,7 +26,14 @@ public class AccountServiceImpl implements AccountService{
                 List.of()
         );
 
-        return accountRepository.save(account);
+        userService.createUser(
+            request.name(),
+            request.email(),
+            request.cpf(),
+            account.getAccountId()
+        );
+
+        accountRepository.save(account);
     }
 
     @Override
@@ -41,18 +51,4 @@ public class AccountServiceImpl implements AccountService{
         accountRepository.save(account);
     }
 
-    @Override
-    public void transfer(Account payerAccount, Account payeeAccount, double amount) {
-        payerAccount.setBalance(payerAccount.getBalance() - amount);
-        payeeAccount.setBalance(payeeAccount.getBalance() + amount);
-
-        updateAccount(payerAccount);
-        updateAccount(payeeAccount);
-    }
-
-    @Override
-    public void deposit(Account account, double amount) {
-        account.setBalance(account.getBalance() + amount);
-        updateAccount(account);
-    }
 }

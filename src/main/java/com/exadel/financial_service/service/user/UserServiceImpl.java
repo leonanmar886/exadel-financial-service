@@ -1,4 +1,4 @@
-package com.exadel.financial_service.service.entity.user;
+package com.exadel.financial_service.service.user;
 
 import com.exadel.financial_service.model.entity.User;
 import com.exadel.financial_service.repository.UserRepository;
@@ -14,7 +14,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public User createUser(String name, String email, String cpf, String accountId) {
+    public void createUser(String name, String email, String cpf, String accountId) {
         User user = new User(
             UUID.randomUUID(),
             name,
@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
             accountId
         );
 
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
     @Override

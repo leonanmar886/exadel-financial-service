@@ -1,8 +1,7 @@
 package com.exadel.financial_service.controller;
 
 import com.exadel.financial_service.model.dto.request.CreationTransferRequestDTO;
-import com.exadel.financial_service.model.dto.request.DepositRequestDTO;
-import com.exadel.financial_service.service.core.CoreService;
+import com.exadel.financial_service.service.financial_operation.FinancialOperationsService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,24 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @Validated
 public class FinancialOperationsController {
-    private final CoreService coreService;
+    private final FinancialOperationsService financialOperationsService;
 
     @PostMapping("/transfer")
     public ResponseEntity<String> transfer(@RequestBody @Valid CreationTransferRequestDTO request) {
-        coreService.transfer(
-            request.payerAccountNumber(),
-            request.payeeAccountNumber(),
-            request.amount()
-        );
+        financialOperationsService.transfer(request);
         return ResponseEntity.ok("Transfer successful");
-    }
-
-    @PostMapping("/deposit")
-    public ResponseEntity<String> deposit(@RequestBody @Valid DepositRequestDTO request) {
-        coreService.deposit(
-            request.accountNumber(),
-            request.amount()
-        );
-        return ResponseEntity.ok("Deposit successful");
     }
 }

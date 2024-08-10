@@ -2,31 +2,27 @@ package com.exadel.financial_service.model.entity;
 
 import jakarta.persistence.*;
 
+import java.util.UUID;
+
 @Entity
-public class Transfer extends FinancialOperation {
+public class Transfer {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "source_account_id")
-    private Account source;
+    private Account payer;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "destination_account_id")
-    private Account destination;
+    private Account payee;
 
-    @MapsId
-    @OneToOne
-    @JoinColumn(name = "id")
-    private FinancialOperation financialOperation;
+    private Double amount;
 
-    public Transfer(Double amount) {
-        super(amount);
-    }
-
-    public Transfer() {
-    }
-
-    public Transfer(Account source, Account destination, Double amount) {
-        super(amount);
-        this.source = source;
-        this.destination = destination;
+    public Transfer(Account payer, Account payee, Double amount) {
+        this.amount = amount;
+        this.payer = payer;
+        this.payee = payee;
     }
 }
