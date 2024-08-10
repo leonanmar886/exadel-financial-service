@@ -25,7 +25,7 @@ public class Account extends DataAudit {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<FinancialOperation> transactions;
+    private List<Transfer> transactions;
 
     public Account() {
         this.id = UUID.randomUUID();
