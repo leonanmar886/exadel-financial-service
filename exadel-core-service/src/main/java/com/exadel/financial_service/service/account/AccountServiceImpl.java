@@ -38,7 +38,7 @@ public class AccountServiceImpl implements AccountService{
 
     @Override
     public Optional<Account> getAccountById(String accountNumber) {
-        return accountRepository.findByAccountNumber(accountNumber);
+        return accountRepository.findByAccountId(accountNumber);
     }
 
     @Override
