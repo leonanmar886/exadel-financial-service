@@ -1,0 +1,22 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: core-service
+          uri: http://localhost:8080
+          predicates:
+            - Path=/**
+          filters:
+            - name: TokenRelay
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter:
+                  replenishRate: 10
+                  burstCapacity: 20
+            - name: RedirectTo
+              args:
+                status: 302
+                url: http://localhost:8081
+            - name: JwtAuthenticationFilter
+          default-filters:
+            - name: JwtAuthenticationFilter
