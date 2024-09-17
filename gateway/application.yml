@@ -13,17 +13,6 @@ app:
 spring:
   application:
     name: gateway
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-    format-sql: true
-
-  datasource:
-    url: jdbc:postgresql://localhost:5448 /auth_database
-    username: leonan
-    password: 123456
-    driver-class-name: org.postgresql.Driver
 
   cloud:
     gateway:
