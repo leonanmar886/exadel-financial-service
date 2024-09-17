@@ -1,0 +1,39 @@
+app:
+  authentication:
+    jwt:
+      secret: 321b963cf05e1b2d9af721754e56cc67170a92813b7630761229fd1179f6aa77
+      expiration: 86400000
+      header: Authorization
+      prefix: Bearer
+      type: JWT
+  gateway:
+    core-service:
+      target-url: http://localhost:8080
+
+spring:
+  application:
+    name: gateway
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    format-sql: true
+
+  datasource:
+    url: jdbc:postgresql://localhost:5448 /auth_database
+    username: leonan
+    password: 123456
+    driver-class-name: org.postgresql.Driver
+
+  cloud:
+    gateway:
+      routes:
+        - id: core-service
+          uri: http://localhost:8080
+          predicates:
+            - Path=/**
+          filters:
+            - name: JwtAuthenticationFilter
+
+server:
+  port: 8081

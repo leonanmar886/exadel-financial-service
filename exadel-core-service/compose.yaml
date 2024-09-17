@@ -16,9 +16,9 @@ services:
       POSTGRES_USER: leonan       # Nome do usuário que você deseja
       POSTGRES_PASSWORD: 123456   # Senha do usuário
     ports:
-      - '5432:5432'
+      - '5435:5432'
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - core_postgres_data:/var/lib/postgresql/data
 
 volumes:
-  postgres_data:
+  core_postgres_data:
