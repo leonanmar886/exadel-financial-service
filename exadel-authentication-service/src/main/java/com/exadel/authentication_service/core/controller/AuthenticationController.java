@@ -1,13 +1,17 @@
 package com.exadel.authentication_service.core.controller;
 
-import com.exadel.gateway.core.model.dto.request.LoginRequestDTO;
-import com.exadel.gateway.core.service.authentication.AuthenticationService;
+import com.exadel.authentication_service.core.model.dto.request.LoginRequestDTO;
+import com.exadel.authentication_service.core.model.dto.request.RegisterUserRequestDTO;
+import com.exadel.authentication_service.core.model.dto.response.LoginResponseDTO;
+import com.exadel.authentication_service.core.service.authentication.AuthenticationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth")
@@ -16,15 +20,15 @@ import org.springframework.web.bind.annotation.*;
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
-    @PostMapping("/validateToken")
-    public ResponseEntity<Void> validateToken(@RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
-        authenticationService.validateToken(token);
-        return ResponseEntity.ok().build();
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid LoginRequestDTO request) {
+        LoginResponseDTO responseDTO = authenticationService.login(request);
+        return ResponseEntity.ok().body(responseDTO);
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<Void> login(@RequestBody @Valid LoginRequestDTO request) {
-        authenticationService.login(request);
-        return ResponseEntity.ok().build();
+    @PostMapping("/register")
+    public ResponseEntity<String> register(@RequestBody @Valid RegisterUserRequestDTO request) {
+        authenticationService.register(request);
+        return ResponseEntity.ok("User registered");
     }
 }

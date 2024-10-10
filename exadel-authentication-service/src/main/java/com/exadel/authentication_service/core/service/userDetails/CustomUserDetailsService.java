@@ -1,7 +1,7 @@
 package com.exadel.authentication_service.core.service.userDetails;
 
-import com.exadel.gateway.core.model.entity.User;
-import com.exadel.gateway.core.repository.UserRepository;
+import com.exadel.authentication_service.core.model.entity.User;
+import com.exadel.authentication_service.core.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -26,6 +26,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
                 user.isEnabled(), true, true, true, getAuthorities(user.getRole()));
+    }
+
+    public void registerUser(User user) {
+        userRepository.save(user);
     }
 
     private Collection<? extends GrantedAuthority> getAuthorities(String role) {

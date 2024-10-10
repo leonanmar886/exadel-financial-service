@@ -1,0 +1,31 @@
+app:
+  core-service:
+    url: http://localhost:8081/core-service
+  authentication:
+    jwt:
+      regular:
+        secret: 321b963cf05e1b2d9af721754e56cc67170a92813b7630761229fd1179f6aa77
+        expiration: 86400000
+        header: Authorization
+        prefix: Bearer
+        type: JWT
+      service:
+        secret: GnlOnUAHvySgK9RgBik2qReWtyiP6m+1wDN4lq141p0=
+        expiration: 86400000
+        header: Authorization
+        prefix: Bearer
+        type: JWT
+
+spring:
+  datasource:
+    url: jdbc:postgresql://host.docker.internal:5448/auth_database
+    username: leonan
+    password: 123456
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+server:
+  port: 8082

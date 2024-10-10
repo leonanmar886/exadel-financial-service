@@ -1,7 +1,7 @@
 package com.exadel.authentication_service.config.authentication;
 
-import com.exadel.gateway.core.repository.UserRepository;
-import com.exadel.gateway.core.service.userDetails.CustomUserDetailsService;
+import com.exadel.authentication_service.core.repository.UserRepository;
+import com.exadel.authentication_service.core.service.userDetails.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
