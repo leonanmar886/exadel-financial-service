@@ -16,6 +16,11 @@ app:
         prefix: Bearer
         type: JWT
 
+logging:
+  level:
+    org.springframework.security: DEBUG
+
+
 spring:
   datasource:
     url: jdbc:postgresql://host.docker.internal:5448/auth_database

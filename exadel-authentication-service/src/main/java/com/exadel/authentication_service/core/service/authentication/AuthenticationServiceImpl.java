@@ -34,10 +34,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public LoginResponseDTO login(LoginRequestDTO request) {
-        PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         Authentication authenticationRequest = UsernamePasswordAuthenticationToken.unauthenticated(
-            request.username(),
-            passwordEncoder.encode(request.password())
+            request.email(),
+            request.password()
         );
 
         Authentication authenticationResult = authenticationManager.authenticate(authenticationRequest);
@@ -54,7 +53,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 request.name(),
                 passwordEncoder.encode(request.password()),
                 request.cpf(),
-                true
+                true,
+                request.email()
         );
 
         String token = jwtUtil.generateServiceToken();

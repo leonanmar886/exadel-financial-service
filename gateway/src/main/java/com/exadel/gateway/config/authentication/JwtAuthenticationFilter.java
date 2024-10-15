@@ -102,17 +102,21 @@ public class JwtAuthenticationFilter implements Filter {
     }
 
     private boolean validateServiceToken(String token) {
-        SecretKey key = Keys.hmacShaKeyFor(serviceSecretKey.getBytes(StandardCharsets.UTF_8));
+        try {
+            SecretKey key = Keys.hmacShaKeyFor(serviceSecretKey.getBytes(StandardCharsets.UTF_8));
 
-        Claims claims = Jwts.parser()
-                .verifyWith(key)
-                .build()
-                .parseSignedClaims(token)
-                .getPayload();
+            Claims claims = Jwts.parser()
+                    .verifyWith(key)
+                    .build()
+                    .parseSignedClaims(token)
+                    .getPayload();
 
-        String role = claims.get("role", String.class);
+            String role = claims.get("role", String.class);
 
-        return "SERVICE".equals(role);
+            return "SERVICE".equals(role);
+        } catch (JwtException | IllegalArgumentException e) {
+            return false;
+        }
     }
 
 

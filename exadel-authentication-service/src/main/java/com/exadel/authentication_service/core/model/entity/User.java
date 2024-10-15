@@ -29,10 +29,13 @@ public class User {
 
     private boolean enabled;
 
-    public User(String username, String password, String cpf, boolean enabled) {
+    private String email;
+
+    public User(String username, String password, String cpf, boolean enabled, String email) {
         this.username = username;
         this.password = password;
         this.cpf = cpf;
+        this.email = email;
         this.enabled = enabled;
     }
 }
