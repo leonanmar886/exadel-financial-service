@@ -1,0 +1,14 @@
+services:
+  postgres:
+    image: 'postgres:15'
+    environment:
+      POSTGRES_DB: auth_database
+      POSTGRES_USER: leonan
+      POSTGRES_PASSWORD: 123456
+    ports:
+      - '5448:5432'
+    volumes:
+      - auth_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  auth_postgres_data:

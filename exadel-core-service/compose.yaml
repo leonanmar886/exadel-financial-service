@@ -12,13 +12,13 @@ services:
   postgres:
     image: 'postgres:15'
     environment:
-      POSTGRES_DB: core_database  # Nome do banco de dados que você deseja
-      POSTGRES_USER: leonan       # Nome do usuário que você deseja
-      POSTGRES_PASSWORD: 123456   # Senha do usuário
+      POSTGRES_DB: core_database
+      POSTGRES_USER: leonan
+      POSTGRES_PASSWORD: 123456
     ports:
-      - '5432:5432'
+      - '5435:5432'
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - core_postgres_data:/var/lib/postgresql/data
 
 volumes:
-  postgres_data:
+  core_postgres_data:

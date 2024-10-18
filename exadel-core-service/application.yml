@@ -1,13 +1,18 @@
 spring:
   datasource:
-    url: jdbc:postgresql://host.docker.internal:5432/core_database
+    url: jdbc:postgresql://host.docker.internal:5435/core_database
     username: leonan
     password: 123456
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: drop-and-create
+      ddl-auto: update
     show-sql: true
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+
 
 server:
   port: 8080
